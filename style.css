@@ -1,36 +1,95 @@
- body{
-        background-color: black;
-        font-family: Arial, Helvetica, sans-serif;
-        height: 100%;
-    }
-    .container{
-        width: 800px;
-        margin: 30px auto;
-        color: white;
-        text-align: center;
-    }
-    h1,h2,h3{
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 100;
-        font-size: 2.6rem;
-        text-transform: capitalize;
-    }
-    #seconds,#minutes,#hours{
-        font-size: 2cm;
-    }
-    button{
-        width: 150px;
-        height: 50px;
-        background: transparent;
-        color: white;
-        border: 2px solid white;
-        border-radius: 5px;
-        margin-right: 10px;
-        outline: none;
-    }
-    button:hover{
-        background: blue;
-        color: black;
-        font-weight: 800;
-        text-transform: capitalize;
-    }
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: hv;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 1;
+    overflow: hidden;
+}
+h1{
+    font-weight: normal;
+    font-size: 86px;
+    align-items: center;
+}
+
+.count{
+    display: flex;
+}
+.time{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+.time h2{
+    font-weight: bold;
+    font-size: 90px;
+    line-height: 0;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-top: 250px;
+}
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item{
+    padding: 10px;
+}
+.btn1{
+    display: block;
+    border: 0;
+    font-size: 20px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background: #0081D5;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+.btn1:hover,
+.btn1:focus{
+    background: #005C99;
+    color: white;
+}
+.btn1:active{
+    background: #003659;
+}
+.btn1-outline:active{
+    background: white;
+    color: #0081D5;
+}
+
+.btn2{
+    display: block;
+    border: 0;
+    font-size: 20px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    background: #FF5C58;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+.btn2:hover,
+.btn2:focus{
+    background: #FF0000;
+    color: white;
+}
+.btn2:active{
+    background: #003659;
+}
+.btn2-outline:active{
+    background: white;
+    color: #0081D5;
+}
+
+

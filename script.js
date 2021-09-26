@@ -39,6 +39,7 @@
         document.getElementById('minutes').innerHTML = display_minutes;
         document.getElementById('seconds').innerHTML = display_seconds;
     }
+
     function startstopcontinue() {
         if (status === "stopped"){
             interval=window.setInterval(startTimer, 1000);
@@ -56,6 +57,7 @@
             status="paused";
         }
     }
+    
     function stop(){
         window.clearInterval(interval);
         document.getElementById("start-stop-continue").innerHTML="Start";
