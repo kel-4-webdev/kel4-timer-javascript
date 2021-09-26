@@ -1,4 +1,5 @@
 body{
+    background-image: url(https://media.istockphoto.com/photos/gray-abstract-minimal-motion-backgrounds-loopable-elements-4k-picture-id1174989482?b=1&k=20&m=1174989482&s=170667a&w=0&h=ld7ukW9KTzUlJLc6c37C2xs5ESYP2wLyjxsEVCumn2s=);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -9,7 +10,7 @@ body{
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin: 1;
+    margin: 75px;
     overflow: hidden;
 }
 h1{
