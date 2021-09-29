@@ -11,10 +11,7 @@ Anggota Kelompok :
 
 Main Assignment Timer : DONE
 Additional advanced problem : ON PROGRESS
-
-Pembagian Tugas : 
-
-Masing - masing anggota melakukan percobaan beberapa perbedaan algoritma Timer Vanilla Javascript
-hasil Algoritma yang dipilih yaitu menggunakan referensi dari Gemintang. 
-Untuk hasil Style dan Local Storage dibantu oleh Sakhi H.
-Yang lainnya mempelajari dan eksplorasi tentang perbedaan algoritma timer. 
+### Revision
+1. Fix timer keep running when the tab closed or refreshed ✅ 
+2. Fix convert > 60 seconds to hours:minutes:second when the tab refreshed or closed ✅
+3. Additional timer
