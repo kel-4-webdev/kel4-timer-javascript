@@ -72,25 +72,14 @@ Berikut adalah tahapan untuk mengikuti _project_ yang kami buat:
 
 
 ### Prerequisites
-Berikut merupakan persyaratan yang dibutuhkan untuk mengikuti _project_ yang kami buat:
-* Text Editor
-* Aplikasi Browser
+Berikut merupakan persyaratan yang dibutuhkan:
+* _Text_ _Editor_
+* Aplikasi _Browser_
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+1. _Download_ aplikasi _Text Editor_
+2. Intall aplikasi _Text Editor_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
