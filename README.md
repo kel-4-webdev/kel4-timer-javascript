@@ -79,7 +79,7 @@ Berikut merupakan persyaratan yang dibutuhkan:
 ### Installation
 
 1. _Download_ aplikasi _Text Editor_
-2. Intall aplikasi _Text Editor_
+2. Install aplikasi _Text Editor_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
