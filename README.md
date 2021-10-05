@@ -88,6 +88,15 @@ Berikut merupakan persyaratan yang dibutuhkan:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+Penggunaan aplikasi yang sudah kami buat sebagai berikut :
+1. Setelah Clone Repo, buka source code pada _Text Editor_, jika ingin melihat bagaimana isi dari kode.
+2. Buka aplikasi _browser_ untuk melihat hasil dari kode yang sudah dibuat.
+3. Terdapat beberapa fitur sebagai berikut:
+  * Start
+  * Pause
+  * Continue
+  * Stop
+
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
