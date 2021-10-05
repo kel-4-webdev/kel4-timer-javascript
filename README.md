@@ -16,15 +16,6 @@ Additional advanced problem : ON PROGRESS
 2. Fix convert > 60 seconds to hours:minutes:second when the tab refreshed or closed ✅
 3. Additional timer
 
-<div id="top"></div>
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -56,15 +47,9 @@ Additional advanced problem : ON PROGRESS
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Kita terkadang 
-_Project_ 
+Kita terkadang lupa waktu ketika mengerjakan suatu pekerjaan, khususnya ketika kita melakukannya di depan gawai kita (komputer/laptop). Dari kejadian tersebut, kami memutuskan untuk membuat sebuah _Project : TIMER_. _Project_ ini ditujukan sebagai salah satu alat untuk mencatat durasi ketika kita sedang melakukan suatu pekerjaan. Hal tersebut didukung dengan kebiasaan kita untuk tidak mengevaluasi waktu yang dikonsumsi untuk melakukan pekerjaan. Dari tujuan tersebut kami berharap agar siapapun dapat melakukan pencatatan waktu setelah melakukan suatu pekerjaan. _Project TIMER_ ini dibuat berbasis _website_, sehingga kita harus memerlukan _Web Browser_ untuk mengikuti _project_ ini.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+Terdapat banyak alat lain untuk melakukan pencatatan waktu diluar sana. Namun, dalam _project_ ini kita dapat melakukan pencatatan waktu tanpa harus terus membuka _Web Browser_-nya dengan catatan _timer_ sudah dijalankan sebelumnya.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -72,16 +57,9 @@ Of course, no one template will serve all projects since your needs may be diffe
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+_Project_ ini dibuat menggunakan sebuah _framework_ JavaScript:
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [Vanilla.js](http://vanilla-js.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -90,6 +68,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
+Berikut adalah tahapan untuk mengikuti _project_ yang kami buat:
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
