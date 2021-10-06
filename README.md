@@ -96,7 +96,7 @@ Penggunaan aplikasi yang sudah kami buat sebagai berikut :
     * Pause
     * Continue
     * Stop
-4. Adapun fitur dimana ketika aplikasi di _close_ dari browser, kondisi waktu dari _timer_ akan tetap sama ketika sebelum di _close_ dari _browser_
+4. Adapun fitur dimana ketika aplikasi di _close_ dari browser, kondisi waktu dari _timer_ akan tetap sama dengan _timer_ sebelum _browser_ di _close_
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
