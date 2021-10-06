@@ -1,116 +1,217 @@
-let seconds = 0;
-let minutes = 0;
-let hours = 0;
-let display_seconds = 0;
-let display_minutes = 0;
-let display_hours = 0;
-let interval = null;
-let status = "stopped";
+//
+// ---- Update Log ----
+// ./ change "status" to "timer_status", because var "status" is reserved by other methods
+// ./ many global variable turned to array in need of additional timer
+// 
+// ---- Need To Be Fix ----
+// ./ Refactor local storage things
+// ./ Multiple timer can't running at the same time
+// ./ UI
+//
 
-window.addEventListener('beforeunload', function (e) {
+let seconds = [6];
+let minutes = [6];
+let hours = [6];
+let display_seconds = [6];
+let display_minutes = [6];
+let display_hours = [6];
+const button2S1C = [6];
+const buttonStop = [6];
+// assign to 0
+for (i=0; i<6; i++) {
+    seconds[i] = 0;
+    minutes[i] = 0;
+    hours[i] = 0;
+    display_seconds[i] = 0;
+    display_minutes[i] = 0;
+    display_hours[i] = 0;
+    button2S1C[i] = "start-stop-continue" + i;
+    buttonStop[i] = "button-stop" + i;
+}
+
+let interval = null;
+let timer_status = "stopped";
+let total_timer = 0
+
+window.addEventListener("beforeunload", function (e) {
 
     e.preventDefault()
 
-    localStorage.setItem('closed-time', new Date());
-    localStorage.setItem('Time', JSON.stringify({hours, minutes, seconds}));
-    localStorage.setItem('stat', status);
+    localStorage.setItem("closed-time", new Date());
+    localStorage.setItem("Time", JSON.stringify({hours, minutes, seconds}));
+    // localStorage.setItem("Time", JSON.stringify({0, minutes, seconds}));
+    localStorage.setItem("stat", timer_status);
 });
 
-window.addEventListener('load', function (e) {
+window.addEventListener("load", function (e) {
 
-    let close_time = localStorage.getItem('closed-time');
+    let close_time = localStorage.getItem("closed-time");
     let elapsed_time = (new Date().getTime() - new Date(close_time).getTime()) / 1000;
-    let duration = JSON.parse(localStorage.getItem('Time'));
+    let duration = JSON.parse(localStorage.getItem("Time"));
     let time_to_sec = calculateDuration(duration.hours, duration.minutes, duration.seconds);
 
     // timer still running when the tab closed or refreshed
-    if (localStorage.getItem('stat') === "paused") {
+    if (localStorage.getItem("stat") === "paused") {
         seconds = Math.floor(elapsed_time + time_to_sec);
 
         // get multiple return value
         // from https://stackoverflow.com/questions/2917175/return-multiple-values-in-javascript
         let valueTime = secondToTime(seconds)
-        hours = valueTime[0]
-        minutes = valueTime[1]
-        seconds = valueTime[2] - 1 // -1 because startTimer() starting with seconds++
+        hours[0] = valueTime[0]
+        minutes[0] = valueTime[1]
+        seconds[0] = valueTime[2] - 1 // -1 because startTimer() starting with seconds++
         startTimer() // set time when first load
-        startstopcontinue(); // rev for timer auto play when refresh
+        startstopcontinue(); // revision for timer auto play when refresh
     }
-    
+
     // timer paused when the tab closed or refreshed
-    if (localStorage.getItem('stat') === "continue") {
-        hours = duration.hours
-        minutes = duration.minutes
-        seconds = duration.seconds - 1 // -1 because startTimer() starting with seconds++
-        status = "paused"
+    if (localStorage.getItem("stat") === "continue") {
+        hours[0] = duration.hours[0]
+        minutes[0] = duration.minutes[0]
+        seconds[0] = duration.seconds[0] - 1 // -1 because startTimer() starting with seconds++
+        timer_status = "paused"
         startTimer()
         startstopcontinue()
     }
 
 });
 
-function startTimer(){
-    seconds++;
-    if (seconds / 60 === 1) {
-        seconds = 0;
-        minutes++;
-        if (minutes / 60 === 1){
-            minutes = 0;
-            hours++;
-        }                    
+function startTimer(element){
+    let selectedElement = 0
+    switch(element) {
+        case "start-stop-continue0":
+            selectedElement = 0
+          break;
+        case "start-stop-continue1":
+            selectedElement = 1
+          break;
+        case "start-stop-continue2":
+            selectedElement = 2
+          break;
+        case "start-stop-continue3":
+            selectedElement = 3
+          break;
+        case "start-stop-continue4":
+            selectedElement = 4
+          break;
+        case "start-stop-continue5":
+            selectedElement = 5
+          break;
+        default:
+            break;
     }
-    if (seconds < 10){
-        display_seconds = "0" + seconds.toString();
+    seconds[selectedElement]++;
+    console.log(seconds[selectedElement])
+    if (seconds[selectedElement] / 60 === 1) {
+        seconds[selectedElement] = 0;
+        minutes[selectedElement]++;
+        if (minutes[selectedElement] / 60 === 1){
+            minutes[selectedElement] = 0;
+            hours[selectedElement]++;
+        }
+    }
+    if (seconds[selectedElement] < 10){
+        display_seconds[selectedElement] = "0" + seconds[selectedElement].toString();
     }
     else{
-        display_seconds = seconds;
+        display_seconds[selectedElement] = seconds[selectedElement];
     }
-    if (minutes < 10){
-        display_minutes = "0" + minutes.toString();
-    }
-    else{
-        display_minutes = minutes;
-    }
-    if (hours < 10){
-        display_hours = "0" + hours.toString();
+    if (minutes[selectedElement] < 10){
+        display_minutes[selectedElement] = "0" + minutes[selectedElement].toString();
     }
     else{
-        display_hours = hours;
+        display_minutes[selectedElement] = minutes[selectedElement];
     }
-    document.getElementById('hours').innerHTML = display_hours;
-    document.getElementById('minutes').innerHTML = display_minutes;
-    document.getElementById('seconds').innerHTML = display_seconds;
+    if (hours[selectedElement] < 10){
+        display_hours[selectedElement] = "0" + hours[selectedElement].toString();
+    }
+    else{
+        display_hours[selectedElement] = hours[selectedElement];
+    }
+    
+    document.getElementById("hours" + selectedElement).innerHTML = display_hours[selectedElement];
+    document.getElementById("minutes" + selectedElement).innerHTML = display_minutes[selectedElement];
+    document.getElementById("seconds" + selectedElement).innerHTML = display_seconds[selectedElement];
 }
 
-function startstopcontinue() {
-    if (status === "stopped"){
-        interval=window.setInterval(startTimer, 1000);
-        document.getElementById("start-stop-continue").innerHTML="Pause";
-        status="paused";
+function startstopcontinue(element) {
+    let selectedElement = 0
+    switch(element) {
+        case "start-stop-continue0":
+            selectedElement = 0
+          break;
+        case "start-stop-continue1":
+            selectedElement = 1
+          break;
+        case "start-stop-continue2":
+            selectedElement = 2
+          break;
+        case "start-stop-continue3":
+            selectedElement = 3
+          break;
+        case "start-stop-continue4":
+            selectedElement = 4
+          break;
+        case "start-stop-continue5":
+            selectedElement = 5
+          break;
+        default:
+            break;
+      }
+    if (timer_status === "stopped"){
+        // pass argument inside parameter 
+        // https://stackoverflow.com/questions/1300242/passing-a-function-with-parameters-as-a-parameter
+        interval=window.setInterval(function(){ return startTimer(element); }, 1000); 
+        document.getElementById(element).innerHTML="Pause";
+        timer_status="paused";
     }
-    else if (status === "paused"){
+    else if (timer_status === "paused"){
         window.clearInterval(interval);
-        document.getElementById("start-stop-continue").innerHTML="Continue";
-        status="continue";
+        document.getElementById(element).innerHTML="Continue";
+        timer_status="continue";
     }
-    else if (status === "continue"){
-        interval=window.setInterval(startTimer, 1000);
-        document.getElementById("start-stop-continue").innerHTML="Pause";
-        status="paused"; 
+    else if (timer_status === "continue"){
+        interval=window.setInterval(function(){ return startTimer(element); }, 1000);
+        document.getElementById(element).innerHTML="Pause";
+        timer_status="paused"; 
     }
 }
 
-function stop(){
+function stop(element){
+    let selectedElement = 0
+    switch(element) {
+        case "button-stop0":
+            selectedElement = 0
+          break;
+        case "button-stop1":
+            selectedElement = 1
+          break;
+        case "button-stop2":
+            selectedElement = 2
+          break;
+        case "button-stop3":
+            selectedElement = 3
+          break;
+        case "button-stop4":
+            selectedElement = 4
+          break;
+        case "button-stop5":
+            selectedElement = 5
+          break;
+        default:
+            break;
+    }
     window.clearInterval(interval);
-    document.getElementById("start-stop-continue").innerHTML="Start";
-    document.getElementById("pesan").innerHTML="Total Waktu Pengerjaan : " + hours + " Jam " + minutes + " Menit " + seconds + " Detik";
-    status = "stopped";
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
-    document.getElementById('hours').innerHTML = "00";
-    document.getElementById('minutes').innerHTML = "00";
-    document.getElementById('seconds').innerHTML = "00";
+    document.getElementById("start-stop-continue" + selectedElement).innerHTML="Start";
+    document.getElementById("pesan" + selectedElement).innerHTML="Total Waktu Pengerjaan : " + hours[selectedElement] + " Jam " + minutes[selectedElement] + " Menit " + seconds[selectedElement] + " Detik";
+    timer_status = "stopped";
+    seconds[selectedElement] = 0;
+    minutes[selectedElement] = 0;
+    hours[selectedElement] = 0;
+    console.log("SELECTED ELEMENT: " + selectedElement)
+    document.getElementById("hours" + selectedElement).innerHTML = "00";
+    document.getElementById("minutes" + selectedElement).innerHTML = "00";
+    document.getElementById("seconds" + selectedElement).innerHTML = "00";
 }
 
 function calculateDuration(hour, minute, second) {
@@ -130,4 +231,36 @@ function secondToTime(second) {
     var sec2minutes = Math.floor((sec_num - (sec2hours * 3600)) / 60);
     var sec2seconds = sec_num - (sec2hours * 3600) - (sec2minutes * 60);
     return [sec2hours, sec2minutes, sec2seconds];
+}
+
+function addTimer() {
+    total_timer += 1;
+    const div = document.createElement("div");
+    div.innerHTML = `
+	<div id="count` + total_timer + `" class="count">
+		<div class="time">
+			<h2 id="hours` + total_timer + `">00</h2>
+			<small>Hours</small>
+		</div>
+		<div class="time">
+			<h2 id="minutes` + total_timer + `">00</h2>
+			<small>Minutes</small>
+		</div>
+		<div class="time">
+			<h2 id="seconds` + total_timer + `">00</h2>
+			<small>Seconds</small>
+		</div>
+	</div>
+	<div class="wrap">
+		<div class="item">
+			<button class="btn1" onclick="startstopcontinue(this.id)" id="start-stop-continue` + total_timer + `">Start</button>
+		</div>
+		<div class="item">
+			<button class="btn2" onclick="stop(this.id)" id="button-stop` + total_timer + `">Stop</button>
+		</div>
+	</div>
+	<h2 id="pesan` + total_timer + `">Waktu Pengerjaan Anda : 0 Jam 0 Menit 0 Detik</h2>
+    `;
+    console.log(total_timer);
+    document.getElementById("additional-timer").appendChild(div);
 }

@@ -10,27 +10,32 @@
 <body>
 	<div id="count" class="count">
 		<div class="time">
-			<h2 id="hours">00</h2>
+			<h2 id="hours0">00</h2>
 			<small>Hours</small>
 		</div>
 		<div class="time">
-			<h2 id="minutes">00</h2>
+			<h2 id="minutes0">00</h2>
 			<small>Minutes</small>
 		</div>
 		<div class="time">
-			<h2 id="seconds">00</h2>
+			<h2 id="seconds0">00</h2>
 			<small>Seconds</small>
 		</div>
 	</div>
 	<div class="wrap">
 		<div class="item">
-			<button class="btn1" onclick="startstopcontinue()" id="start-stop-continue">Start</button>
+			<button class="btn1" onclick="startstopcontinue(this.id)" id="start-stop-continue0">Start</button>
 		</div>
 		<div class="item">
-			<button class="btn2" onclick="stop()" id="button-stop">Stop</button>
+			<button class="btn2" onclick="stop(this.id)" id="button-stop0">Stop</button>
 		</div>
 	</div>
-	<h2 id="pesan">Waktu Pengerjaan Anda : 0 Jam 0 Menit 0 Detik</h2>
+	<h2 id="pesan0">Waktu Pengerjaan Anda : 0 Jam 0 Menit 0 Detik</h2>
+	<br><br>
+	<button onclick="addTimer()" style="font-size:30px;">+</button>
+	<div id="additional-timer">
+
+	</div>
 </body>
 <script type="text/javascript" src="script.js"></script>
 </html>
