@@ -6,6 +6,7 @@
 // ---- Need To Be Fix ----
 // ./ Refactor local storage things
 // ./ Multiple timer can't running at the same time
+// ./ Window Interval
 // ./ UI
 //
 
@@ -15,9 +16,9 @@ let hours = [6];
 let display_seconds = [6];
 let display_minutes = [6];
 let display_hours = [6];
-const button2S1C = [6];
-const buttonStop = [6];
-// assign to 0
+let timer_status = [6];
+
+// initiate array var value to 0
 for (i=0; i<6; i++) {
     seconds[i] = 0;
     minutes[i] = 0;
@@ -25,12 +26,10 @@ for (i=0; i<6; i++) {
     display_seconds[i] = 0;
     display_minutes[i] = 0;
     display_hours[i] = 0;
-    button2S1C[i] = "start-stop-continue" + i;
-    buttonStop[i] = "button-stop" + i;
+    timer_status[i] = "stopped";
 }
 
 let interval = null;
-let timer_status = "stopped";
 let total_timer = 0
 
 window.addEventListener("beforeunload", function (e) {
@@ -77,29 +76,17 @@ window.addEventListener("load", function (e) {
 });
 
 function startTimer(element){
-    let selectedElement = 0
-    switch(element) {
-        case "start-stop-continue0":
-            selectedElement = 0
-          break;
-        case "start-stop-continue1":
-            selectedElement = 1
-          break;
-        case "start-stop-continue2":
-            selectedElement = 2
-          break;
-        case "start-stop-continue3":
-            selectedElement = 3
-          break;
-        case "start-stop-continue4":
-            selectedElement = 4
-          break;
-        case "start-stop-continue5":
-            selectedElement = 5
-          break;
-        default:
+    let selectedElement = 0;
+    let i = 0;
+    while(i < 6) {
+        if(element == "start-stop-continue"+i) {
+            selectedElement = i;
+            i = 0;
             break;
+        } 
+        i++;
     }
+
     seconds[selectedElement]++;
     console.log(seconds[selectedElement])
     if (seconds[selectedElement] / 60 === 1) {
@@ -135,76 +122,53 @@ function startTimer(element){
 }
 
 function startstopcontinue(element) {
-    let selectedElement = 0
-    switch(element) {
-        case "start-stop-continue0":
-            selectedElement = 0
-          break;
-        case "start-stop-continue1":
-            selectedElement = 1
-          break;
-        case "start-stop-continue2":
-            selectedElement = 2
-          break;
-        case "start-stop-continue3":
-            selectedElement = 3
-          break;
-        case "start-stop-continue4":
-            selectedElement = 4
-          break;
-        case "start-stop-continue5":
-            selectedElement = 5
-          break;
-        default:
+    let selectedElement = 0;
+    let i = 0;
+    while(i < 6) {
+        if(element == "start-stop-continue"+i) {
+            selectedElement = i;
+            i = 0;
             break;
-      }
-    if (timer_status === "stopped"){
+        } 
+        i++;
+    }
+
+    if (timer_status[selectedElement] === "stopped"){
         // pass argument inside parameter 
         // https://stackoverflow.com/questions/1300242/passing-a-function-with-parameters-as-a-parameter
         interval=window.setInterval(function(){ return startTimer(element); }, 1000); 
         document.getElementById(element).innerHTML="Pause";
-        timer_status="paused";
+        timer_status[selectedElement]="paused";
     }
-    else if (timer_status === "paused"){
+    else if (timer_status[selectedElement] === "paused"){
         window.clearInterval(interval);
         document.getElementById(element).innerHTML="Continue";
-        timer_status="continue";
+        timer_status[selectedElement]="continue";
     }
-    else if (timer_status === "continue"){
+    else if (timer_status[selectedElement] === "continue"){
         interval=window.setInterval(function(){ return startTimer(element); }, 1000);
         document.getElementById(element).innerHTML="Pause";
-        timer_status="paused"; 
+        timer_status[selectedElement]="paused"; 
     }
 }
 
 function stop(element){
     let selectedElement = 0
-    switch(element) {
-        case "button-stop0":
-            selectedElement = 0
-          break;
-        case "button-stop1":
-            selectedElement = 1
-          break;
-        case "button-stop2":
-            selectedElement = 2
-          break;
-        case "button-stop3":
-            selectedElement = 3
-          break;
-        case "button-stop4":
-            selectedElement = 4
-          break;
-        case "button-stop5":
-            selectedElement = 5
-          break;
-        default:
+
+    let i = 0;
+    while(i < 6) {
+        if(element == "button-stop"+i) {
+            selectedElement = i;
+            i = 0;
             break;
+        } 
+        i++;
     }
+
     window.clearInterval(interval);
     document.getElementById("start-stop-continue" + selectedElement).innerHTML="Start";
     document.getElementById("pesan" + selectedElement).innerHTML="Total Waktu Pengerjaan : " + hours[selectedElement] + " Jam " + minutes[selectedElement] + " Menit " + seconds[selectedElement] + " Detik";
-    timer_status = "stopped";
+    timer_status[selectedElement] = "stopped";
     seconds[selectedElement] = 0;
     minutes[selectedElement] = 0;
     hours[selectedElement] = 0;
@@ -234,33 +198,35 @@ function secondToTime(second) {
 }
 
 function addTimer() {
-    total_timer += 1;
-    const div = document.createElement("div");
-    div.innerHTML = `
-	<div id="count` + total_timer + `" class="count">
-		<div class="time">
-			<h2 id="hours` + total_timer + `">00</h2>
-			<small>Hours</small>
-		</div>
-		<div class="time">
-			<h2 id="minutes` + total_timer + `">00</h2>
-			<small>Minutes</small>
-		</div>
-		<div class="time">
-			<h2 id="seconds` + total_timer + `">00</h2>
-			<small>Seconds</small>
-		</div>
-	</div>
-	<div class="wrap">
-		<div class="item">
-			<button class="btn1" onclick="startstopcontinue(this.id)" id="start-stop-continue` + total_timer + `">Start</button>
-		</div>
-		<div class="item">
-			<button class="btn2" onclick="stop(this.id)" id="button-stop` + total_timer + `">Stop</button>
-		</div>
-	</div>
-	<h2 id="pesan` + total_timer + `">Waktu Pengerjaan Anda : 0 Jam 0 Menit 0 Detik</h2>
-    `;
-    console.log(total_timer);
-    document.getElementById("additional-timer").appendChild(div);
+    // max timer = 5
+    if (total_timer < 6) {
+        total_timer += 1;
+        const div = document.createElement("div");
+        div.innerHTML = `
+        <div id="count` + total_timer + `" class="count">
+            <div class="time">
+                <h2 id="hours` + total_timer + `">00</h2>
+                <small>Hours</small>
+            </div>
+            <div class="time">
+                <h2 id="minutes` + total_timer + `">00</h2>
+                <small>Minutes</small>
+            </div>
+            <div class="time">
+                <h2 id="seconds` + total_timer + `">00</h2>
+                <small>Seconds</small>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="item">
+                <button class="btn1" onclick="startstopcontinue(this.id)" id="start-stop-continue` + total_timer + `">Start</button>
+            </div>
+            <div class="item">
+                <button class="btn2" onclick="stop(this.id)" id="button-stop` + total_timer + `">Stop</button>
+            </div>
+        </div>
+        <h2 id="pesan` + total_timer + `">Waktu Pengerjaan Anda : 0 Jam 0 Menit 0 Detik</h2>
+        `;
+        document.getElementById("additional-timer").appendChild(div);
+    }
 }
